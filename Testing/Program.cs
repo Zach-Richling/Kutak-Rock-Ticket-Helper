@@ -4,7 +4,7 @@ using System.Net.NetworkInformation;
 using System.Timers;
 using Topshelf;
 
-namespace Testing {
+namespace KutakRock {
     class Program {
         public static void Main() {
             var exitCode = HostFactory.Run(x => { 

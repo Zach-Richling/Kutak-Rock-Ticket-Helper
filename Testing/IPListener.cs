@@ -4,7 +4,7 @@ using System.Net;
 using System.Text;
 using System.Timers;
 
-namespace Testing {
+namespace KutakRock {
     public class IPListener {
 
         private readonly Timer _timer;
