@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Kutak Rock WCF Service")]
+[assembly: AssemblyTitle("Testing WCF")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Kutak Rock WCF Service")]
+[assembly: AssemblyProduct("Testing WCF")]
 [assembly: AssemblyCopyright("Copyright ©  2020")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("10d0c82a-8714-445b-9f41-05f05575bd15")]
+[assembly: Guid("078ecafb-e2de-4708-ad94-0fed78d3affc")]
 
 // Version information for an assembly consists of the following four values:
 //
