@@ -5,11 +5,11 @@ using System.Timers;
 using Topshelf;
 
 namespace KutakRock {
-    class Program {
+    class Service_Runner {
         public static void Main() {
             var exitCode = HostFactory.Run(x => { 
-                x.Service<IPListener>(s => {
-                    s.ConstructUsing(ipListener => new IPListener(5000));
+                x.Service<Ticket_Helper>(s => {
+                    s.ConstructUsing(ipListener => new Ticket_Helper(5000));
                     s.WhenStarted(ipListener => ipListener.Start());
                     s.WhenStopped(ipListener => ipListener.Stop());
                 });

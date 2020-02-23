@@ -5,11 +5,11 @@ using System.Text;
 using System.Timers;
 
 namespace KutakRock {
-    public class IPListener {
+    public class Ticket_Helper {
 
         private readonly Timer _timer;
         private string currentIp = new WebClient().DownloadString("https://api.ipify.org");
-        public IPListener(int repeat) {
+        public Ticket_Helper(int repeat) {
             _timer = new Timer(repeat) { AutoReset = true};
             _timer.Elapsed += new ElapsedEventHandler(OnTimedEvent);
         }
