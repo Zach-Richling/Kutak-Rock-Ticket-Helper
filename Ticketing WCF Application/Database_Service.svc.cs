@@ -122,12 +122,11 @@ namespace Ticketing_WCF_Application {
             try
             {
                 MailMessage mail = new MailMessage();
-                SmtpClient smtp = new SmtpClient("smtp.gmail.com");
-                smtp.Port = 465;
-                smtp.Credentials = new NetworkCredential("kutakrockticketing@gmail.com", "7rM-mg!E-7Nh>J8q");
-                smtp.EnableSsl = true;
+                SmtpClient smtp = new SmtpClient("mail.smtp2go.com");
+                smtp.Port = 2525;
+                smtp.Credentials = new NetworkCredential("giked83069@finxmail.com", "PMbMInSthgwI");
 
-                mail.From = new MailAddress("kutakrockticketing@gmail.com");
+                mail.From = new MailAddress("giked83069@finxmail.com");
                 mail.To.Add("zwrdude@gmail.com");
                 mail.Subject = "Test Subject";
                 mail.Body = "Testing Body";
