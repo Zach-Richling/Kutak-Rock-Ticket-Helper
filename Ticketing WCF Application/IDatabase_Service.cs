@@ -33,6 +33,14 @@ namespace Ticketing_WCF_Application {
             ResponseFormat = WebMessageFormat.Json,
             BodyStyle = WebMessageBodyStyle.Wrapped)]
         string addMachineinfo(string machineName, string machineInfo);
+
+        [OperationContract]
+        [WebInvoke(Method = "GET",
+            UriTemplate = "/CreateTicket/{ticketName}/{ticketDesc}/{ticketSeverity}/{computerID}",
+            RequestFormat = WebMessageFormat.Json,
+            ResponseFormat = WebMessageFormat.Json,
+            BodyStyle = WebMessageBodyStyle.Wrapped)]
+        string createTicket(string ticketName, string ticketDesc, string ticketSeverity, string computerID);
     }
 
     public class MachineInfo {

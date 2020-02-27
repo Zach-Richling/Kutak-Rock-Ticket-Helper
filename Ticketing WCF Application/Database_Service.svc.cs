@@ -11,6 +11,8 @@ using System.Data.SqlClient;
 using Newtonsoft.Json;
 using System.Security.Cryptography;
 using System.IO;
+using System.Data;
+using System.Windows.Forms;
 
 namespace Ticketing_WCF_Application {
     // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "Service1" in code, svc and config file together.
@@ -52,19 +54,64 @@ namespace Ticketing_WCF_Application {
                 string connectionString = @"Server=tcp:kutak-rock.database.windows.net,1433;Initial Catalog=Kutak Rock Ticketing;Persist Security Info=False;User ID=Kutak_Rock_WCF;Password=7rM-mg!E-7Nh>J8q;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
-                    using (SqlCommand cmd = new SqlCommand($"INSERT INTO Framing.Computers(ExternalIp, MachineName) VALUES ('{ip}', '{machineName}')", conn))
+                    SqlCommand insert = new SqlCommand(null, conn);
+                    insert.CommandText = "exec EnsureComputerExists @MachineName, @ExternalIP";
+                    insert.Parameters.Add(new SqlParameter("@MachineName", SqlDbType.VarChar, 20));
+                    insert.Parameters.Add(new SqlParameter("@ExternalIP", SqlDbType.VarChar, 20));
+                    conn.Open();
+                    insert.Prepare();
+                    insert.Parameters[0].Value = machineName;
+                    insert.Parameters[1].Value = ip;
+                    using (SqlDataReader reader = insert.ExecuteReader())
                     {
-                        conn.Open();
-                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        string output = "";
+                        while (reader.Read())
                         {
-                            
+                            output += "Id: " + reader["Id"].ToString() + " ";
+                            output += "Info: " + reader["INFO"].ToString();
                         }
-                            return "Added Computer";
+                        conn.Close();
+                        return output;
                     }
                 }
-            } catch (SqlException e)
+            } catch (Exception e)
             {
-                return e.Message;
+                return e.ToString();
+            }
+        }
+        string IDatabase_Service.createTicket(string ticketName, string ticketDesc, string ticketSeverity, string computerID)
+        {
+            try
+            {
+                string connectionString = @"Server=tcp:kutak-rock.database.windows.net,1433;Initial Catalog=Kutak Rock Ticketing;Persist Security Info=False;User ID=Kutak_Rock_WCF;Password=7rM-mg!E-7Nh>J8q;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    SqlCommand insert = new SqlCommand(null, conn);
+                    insert.CommandText = "exec CreateTicket @ComputerId, @TicketName, @TicketDescription, @TicketSeverity";
+                    insert.Parameters.Add(new SqlParameter("@ComputerId", SqlDbType.Int));
+                    insert.Parameters.Add(new SqlParameter("@TicketName", SqlDbType.VarChar, 50));
+                    insert.Parameters.Add(new SqlParameter("@TicketDescription", SqlDbType.VarChar, 200));
+                    insert.Parameters.Add(new SqlParameter("@TicketSeverity", SqlDbType.Int));
+                    conn.Open();
+                    insert.Prepare();
+                    insert.Parameters[0].Value = computerID;
+                    insert.Parameters[1].Value = ticketName;
+                    insert.Parameters[2].Value = ticketDesc;
+                    insert.Parameters[3].Value = ticketSeverity;
+                    using (SqlDataReader reader = insert.ExecuteReader())
+                    {
+                        string output = "";
+                        while (reader.Read())
+                        {
+                            output += reader["Id"].ToString();
+                        }
+                        conn.Close();
+                        return output;
+                    }
+                }
+            } catch (Exception e)
+            {
+                return e.ToString();
             }
         }
 
