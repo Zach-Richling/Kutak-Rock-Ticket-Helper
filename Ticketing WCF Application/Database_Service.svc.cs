@@ -13,6 +13,8 @@ using System.Security.Cryptography;
 using System.IO;
 using System.Data;
 using System.Windows.Forms;
+using System.Net.Mail;
+using System.Net;
 
 namespace Ticketing_WCF_Application {
     // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "Service1" in code, svc and config file together.
@@ -109,6 +111,31 @@ namespace Ticketing_WCF_Application {
                         return output;
                     }
                 }
+            } catch (Exception e)
+            {
+                return e.ToString();
+            }
+        }
+
+        public string sendTicket(string ticketId)
+        {
+            try
+            {
+                MailMessage mail = new MailMessage();
+                SmtpClient smtp = new SmtpClient("smtp.gmail.com");
+                smtp.Port = 465;
+                smtp.Credentials = new NetworkCredential("kutakrockticketing@gmail.com", "7rM-mg!E-7Nh>J8q");
+                smtp.EnableSsl = true;
+
+                mail.From = new MailAddress("kutakrockticketing@gmail.com");
+                mail.To.Add("zwrdude@gmail.com");
+                mail.Subject = "Test Subject";
+                mail.Body = "Testing Body";
+
+                smtp.Send(mail);
+
+                return "Sent";
+
             } catch (Exception e)
             {
                 return e.ToString();

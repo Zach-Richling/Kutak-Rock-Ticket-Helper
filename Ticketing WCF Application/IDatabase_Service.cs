@@ -41,6 +41,14 @@ namespace Ticketing_WCF_Application {
             ResponseFormat = WebMessageFormat.Json,
             BodyStyle = WebMessageBodyStyle.Wrapped)]
         string createTicket(string ticketName, string ticketDesc, string ticketSeverity, string computerID);
+
+        [OperationContract]
+        [WebInvoke(Method = "GET",
+            UriTemplate = "/SendTicket/{ticketId}",
+            RequestFormat = WebMessageFormat.Json,
+            ResponseFormat = WebMessageFormat.Json,
+            BodyStyle = WebMessageBodyStyle.Wrapped)]
+        string sendTicket(string ticketId);
     }
 
     public class MachineInfo {
