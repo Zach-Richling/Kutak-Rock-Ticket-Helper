@@ -84,7 +84,7 @@ namespace Ticketing_WCF_Application {
             }
         }
 
-        string IDatabase_Service.addComputer(string ip, string machineName)
+        DatabaseOutput IDatabase_Service.addComputer(string ip, string machineName)
         {
             try
             {
@@ -101,11 +101,11 @@ namespace Ticketing_WCF_Application {
                     insert.Parameters[1].Value = ip;
                     using (SqlDataReader reader = insert.ExecuteReader())
                     {
-                        string output = "";
+                        DatabaseOutput output = new DatabaseOutput();
                         while (reader.Read())
                         {
-                            output += "Id: " + reader["Id"].ToString() + " ";
-                            output += "Info: " + reader["INFO"].ToString();
+                            output.id = reader["Id"].ToString();
+                            output.info = reader["INFO"].ToString();
                         }
                         conn.Close();
                         return output;
@@ -113,7 +113,7 @@ namespace Ticketing_WCF_Application {
                 }
             } catch (Exception e)
             {
-                return e.ToString();
+                return new DatabaseOutput() { id = "-1", info = e.Message};
             }
         }
         string IDatabase_Service.createTicket(string ticketName, string ticketDesc, string ticketSeverity, string computerID)

@@ -24,7 +24,7 @@ namespace Ticketing_WCF_Application {
             RequestFormat = WebMessageFormat.Json,
             ResponseFormat = WebMessageFormat.Json,
             BodyStyle = WebMessageBodyStyle.Wrapped)]
-        string addComputer(String ip, String machineName);
+        DatabaseOutput addComputer(String ip, String machineName);
 
         [OperationContract]
         [WebInvoke(Method = "GET",
