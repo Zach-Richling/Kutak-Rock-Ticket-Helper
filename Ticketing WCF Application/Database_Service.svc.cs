@@ -105,7 +105,7 @@ namespace Ticketing_WCF_Application {
                         while (reader.Read())
                         {
                             output.id = reader["Id"].ToString();
-                            output.info = reader["INFO"].ToString();
+                            output.info = reader["Info"].ToString();
                         }
                         conn.Close();
                         return output;
