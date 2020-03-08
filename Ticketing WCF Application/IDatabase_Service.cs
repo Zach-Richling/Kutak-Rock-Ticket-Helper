@@ -12,11 +12,11 @@ namespace Ticketing_WCF_Application {
     public interface IDatabase_Service {
         [OperationContract]
         [WebInvoke(Method = "GET", 
-            UriTemplate = "/GetMachineInfo/{input}", 
+            UriTemplate = "/GetMachineInfo/{machineName}", 
             RequestFormat = WebMessageFormat.Json, 
             ResponseFormat = WebMessageFormat.Json, 
             BodyStyle = WebMessageBodyStyle.Wrapped)]
-        MachineInfo getMachineinfo(String input);
+        MachineInfo getMachineinfo(String machineName);
 
         [OperationContract]
         [WebInvoke(Method = "GET",

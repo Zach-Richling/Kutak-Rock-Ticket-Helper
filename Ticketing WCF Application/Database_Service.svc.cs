@@ -22,9 +22,44 @@ namespace Ticketing_WCF_Application {
     public class Database_Service : IDatabase_Service
     {
         string key = "b14ca5898a4e4133bbce2ea2315a1916";
-        MachineInfo IDatabase_Service.getMachineinfo(string input)
+        MachineInfo IDatabase_Service.getMachineinfo(string machineName)
         {
-            return new MachineInfo();
+            try 
+            {
+                string connectionString = @"Server=tcp:kutak-rock.database.windows.net,1433;Initial Catalog=Kutak Rock Ticketing;Persist Security Info=False;User ID=Kutak_Rock_WCF;Password=7rM-mg!E-7Nh>J8q;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    SqlCommand insert = new SqlCommand(null, conn);
+                    insert.CommandText = "exec GetMachineInfoByMachineName @MachineName;";
+                    insert.Parameters.Add(new SqlParameter("@MachineName", SqlDbType.VarChar, 20));
+                    conn.Open();
+                    insert.Prepare();
+                    insert.Parameters[0].Value = machineName;
+                    using (SqlDataReader reader = insert.ExecuteReader())
+                    {
+                        MachineInfo output = new MachineInfo();
+                        while (reader.Read())
+                        {
+                            output.id = reader["ComputerId"].ToString();
+                            output.macAddress = reader["MACAddress"].ToString();
+                            output.manufacturer = reader["Manufacturer"].ToString();
+                            output.model = reader["Model"].ToString();
+                            output.OSName = reader["OSName"].ToString();
+                            output.OSVersion = reader["OSVersion"].ToString();
+                            output.ramAmount = reader["RAM"].ToString();
+                            output.BIOSNumber = reader["BIOSNumber"].ToString();
+                            output.BIOSVersion = reader["BIOSVersion"].ToString();
+                            output.userName = reader["Username"].ToString();
+                        }
+                        conn.Close();
+                        return output;
+                    }
+
+                }
+            } catch (Exception e)
+            {
+                return new MachineInfo() { id = "-1"};
+            }
         }
 
         string IDatabase_Service.addMachineinfo(string machineName, string machineInfoInput)
