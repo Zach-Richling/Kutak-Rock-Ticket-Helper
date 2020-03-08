@@ -29,23 +29,58 @@ namespace Ticketing_WCF_Application {
 
         string IDatabase_Service.addMachineinfo(string machineName, string machineInfoInput)
         {
+            /*
             int checkLength = machineInfoInput.Length % 4;
             if (checkLength > 0)
             {
                 machineInfoInput += new string('=', 4 - checkLength);
             }
             string decryptedString = DecryptString(key, machineInfoInput.Replace(" ", "+"));
-            MachineInfo machineInfo = JsonConvert.DeserializeObject<MachineInfo>(decryptedString);
-
-            string connectionString = @"Server=tcp:kutak-rock.database.windows.net,1433;Initial Catalog=Kutak Rock Ticketing;Persist Security Info=False;User ID=Kutak_Rock_WCF;Password=7rM-mg!E-7Nh>J8q;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
-            using (SqlConnection conn = new SqlConnection(connectionString))
-            {
-                using (SqlCommand cmd = new SqlCommand($"INSERT INTO Framing.MachineInfo ", conn))
+            */
+            try {
+                MachineInfo machineInfo = JsonConvert.DeserializeObject<MachineInfo>(machineInfoInput);
+                string connectionString = @"Server=tcp:kutak-rock.database.windows.net,1433;Initial Catalog=Kutak Rock Ticketing;Persist Security Info=False;User ID=Kutak_Rock_WCF;Password=7rM-mg!E-7Nh>J8q;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+                using (SqlConnection conn = new SqlConnection(connectionString))
                 {
+                    SqlCommand insert = new SqlCommand(null, conn);
+                    insert.CommandText = "exec InsertMachineInfo @ComputerId, @OSName, @OSVersion, @Username, @Manufacturer, @Model, @BIOSVersion, @BIOSNumber, @MACAddress, @RAM;";
+                    insert.Parameters.Add(new SqlParameter("@ComputerId", SqlDbType.Int));
+                    insert.Parameters.Add(new SqlParameter("@OSName", SqlDbType.VarChar, 20));
+                    insert.Parameters.Add(new SqlParameter("@OSVersion", SqlDbType.VarChar, 20));
+                    insert.Parameters.Add(new SqlParameter("@Username", SqlDbType.VarChar, 20));
+                    insert.Parameters.Add(new SqlParameter("@Manufacturer", SqlDbType.VarChar, 20));
+                    insert.Parameters.Add(new SqlParameter("@Model", SqlDbType.VarChar, 20));
+                    insert.Parameters.Add(new SqlParameter("@BIOSVersion", SqlDbType.VarChar, 20));
+                    insert.Parameters.Add(new SqlParameter("@BIOSNumber", SqlDbType.VarChar, 20));
+                    insert.Parameters.Add(new SqlParameter("@MACAddress", SqlDbType.VarChar, 20));
+                    insert.Parameters.Add(new SqlParameter("@RAM", SqlDbType.Int));
                     conn.Open();
-                    cmd.ExecuteNonQuery();
-                    return "Added Computer";
+                    insert.Prepare();
+                    insert.Parameters[0].Value = int.Parse(machineInfo.id);
+                    insert.Parameters[1].Value = machineInfo.OSName;
+                    insert.Parameters[2].Value = machineInfo.OSVersion;
+                    insert.Parameters[3].Value = machineInfo.userName;
+                    insert.Parameters[4].Value = machineInfo.manufacturer;
+                    insert.Parameters[5].Value = machineInfo.model;
+                    insert.Parameters[6].Value = machineInfo.BIOSVersion;
+                    insert.Parameters[7].Value = machineInfo.BIOSNumber;
+                    insert.Parameters[8].Value = machineInfo.macAddress;
+                    insert.Parameters[9].Value = int.Parse(machineInfo.ramAmount);
+                    using (SqlDataReader reader = insert.ExecuteReader())
+                    {
+                        string output = "";
+                        while (reader.Read())
+                        {
+                            output = reader["Info"].ToString();
+                        }
+                        conn.Close();
+                        return output;
+                    }
+
                 }
+            } catch (Exception e)
+            {
+                return e.Message;
             }
         }
 

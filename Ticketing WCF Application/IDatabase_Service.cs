@@ -53,8 +53,6 @@ namespace Ticketing_WCF_Application {
 
     public class MachineInfo {
         public string id = "0";
-        public string ip = "";
-        public string machineName = "";
         public string OSName = "";
         public string OSVersion = "";
         public string userName = "";
@@ -64,12 +62,11 @@ namespace Ticketing_WCF_Application {
         public string BIOSVersion = "";
         public string macAddress = "";
         public string ramAmount = "";
+    }
 
-        public override string ToString()
-        {
-            string newline = Environment.NewLine;
-            return ip + newline + OSName + newline + OSVersion + newline + machineName + newline + userName + newline + manufacturer + newline + model
-                + BIOSNumber + newline + BIOSVersion + newline + macAddress + newline + ramAmount + newline;
-        }
+    public class DatabaseOutput
+    {
+        public string id = "";
+        public string info = "";
     }
 }
