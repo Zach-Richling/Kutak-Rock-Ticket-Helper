@@ -6,8 +6,8 @@ using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Text;
 
-namespace Ticketing_WCF_Application {
-    // NOTE: You can use the "Rename" command on the "Refactor" menu to change the interface name "IService1" in both code and config file together.
+namespace Ticketing_WCF_Application
+{
     [ServiceContract]
     public interface IDatabase_Service {
         [OperationContract]

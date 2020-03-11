@@ -78,6 +78,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="HTTPHeaderAuth.cs" />
     <Compile Include="IDatabase_Service.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Database_Service.svc.cs">
