@@ -49,6 +49,14 @@ namespace Ticketing_WCF_Application {
             ResponseFormat = WebMessageFormat.Json,
             BodyStyle = WebMessageBodyStyle.Wrapped)]
         string sendTicket(string ticketId);
+
+        [OperationContract]
+        [WebInvoke(Method = "GET",
+            UriTemplate = "/GetFAQ",
+            RequestFormat = WebMessageFormat.Json,
+            ResponseFormat = WebMessageFormat.Json,
+            BodyStyle = WebMessageBodyStyle.Wrapped)]
+        List<FAQOutput> getFAQ();
     }
 
     public class MachineInfo {
@@ -68,5 +76,12 @@ namespace Ticketing_WCF_Application {
     {
         public string id = "";
         public string info = "";
+    }
+
+    public class FAQOutput
+    {
+        public string question = "Test";
+        public string description = "Test";
+        public string[] answers;
     }
 }

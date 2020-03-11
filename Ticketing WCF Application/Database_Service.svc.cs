@@ -211,6 +211,37 @@ namespace Ticketing_WCF_Application {
             }
         }
 
+        public List<FAQOutput> getFAQ()
+        {
+            try
+            {
+                string connectionString = @"Server=tcp:kutak-rock.database.windows.net,1433;Initial Catalog=Kutak Rock Ticketing;Persist Security Info=False;User ID=Kutak_Rock_WCF;Password=7rM-mg!E-7Nh>J8q;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    SqlCommand query = new SqlCommand(null, conn);
+                    query.CommandText = "exec getFAQ";
+                    conn.Open();
+                    query.Prepare();
+                    using (SqlDataReader reader = query.ExecuteReader())
+                    {
+                        List<FAQOutput> output = new List<FAQOutput>();
+                        while (reader.Read())
+                        {
+                            string outputQuestion = reader["Question"].ToString();
+                            string outputDescription = reader["Description"].ToString();
+                            string[] outputAnswers = reader["Answers"].ToString().Split('|');
+                            output.Add(new FAQOutput { question = outputQuestion, description = outputDescription, answers = outputAnswers});
+                        }
+                        conn.Close();
+                        return output;
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                return new List<FAQOutput>();
+            }
+        }
         public string EncryptString(string key, string plainInput)
         {
             byte[] iv = new byte[16];
