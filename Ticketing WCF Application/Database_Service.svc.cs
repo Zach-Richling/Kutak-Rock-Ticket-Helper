@@ -216,7 +216,6 @@ namespace Ticketing_WCF_Application {
         {
             try
             {
-                //checkHeaders();
                 string connectionString = @"Server=tcp:kutak-rock.database.windows.net,1433;Initial Catalog=Kutak Rock Ticketing;Persist Security Info=False;User ID=Kutak_Rock_WCF;Password=7rM-mg!E-7Nh>J8q;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
@@ -245,18 +244,6 @@ namespace Ticketing_WCF_Application {
             }
         }
 
-        private bool checkHeaders()
-        {
-            IncomingWebRequestContext request = WebOperationContext.Current.IncomingRequest;
-            WebHeaderCollection headers = request.Headers;
-            MessageBox.Show(request.Method + " " + request.UriTemplateMatch.RequestUri.AbsolutePath);
-            foreach (string headerName in headers.AllKeys)
-            {
-                MessageBox.Show(headerName + ": " + headers[headerName]);
-            }
-
-            return false;
-        }
         private string EncryptString(string key, string plainInput)
         {
             byte[] iv = new byte[16];
