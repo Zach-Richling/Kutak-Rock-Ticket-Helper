@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.Text;
 using System.Timers;
+using System.Management.Automation;
 
 namespace KutakRock {
     public class Ticket_Helper {
@@ -23,7 +24,7 @@ namespace KutakRock {
             public string ramAmount = "";
 
         }
-            private readonly Timer _timer;
+        private readonly Timer _timer;
         private string currentIp = new WebClient().DownloadString("https://api.ipify.org");
         WebRequest webRequest = WebRequest.Create(new Uri("www.google.com"));
         
