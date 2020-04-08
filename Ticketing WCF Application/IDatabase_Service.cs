@@ -65,6 +65,14 @@ namespace Ticketing_WCF_Application
             ResponseFormat = WebMessageFormat.Json,
             BodyStyle = WebMessageBodyStyle.Wrapped)]
         int createFAQ(string question, string desc);
+
+        [OperationContract]
+        [WebInvoke(Method = "GET",
+            UriTemplate = "/CreateFAQAnswer/{questionId}/{answer}",
+            RequestFormat = WebMessageFormat.Json,
+            ResponseFormat = WebMessageFormat.Json,
+            BodyStyle = WebMessageBodyStyle.Wrapped)]
+        string createFAQAnswer(string questionId, string answer);
     }
 
     public class MachineInfo {

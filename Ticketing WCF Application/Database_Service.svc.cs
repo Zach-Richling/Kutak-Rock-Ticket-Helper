@@ -279,6 +279,38 @@ namespace Ticketing_WCF_Application {
             }
         }
 
+        public string createFAQAnswer(string questionId, string answer)
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    SqlCommand insert = new SqlCommand(null, conn);
+                    insert.CommandText = "exec CreateAnswer @QuestionId, @Answer";
+                    insert.Parameters.Add(new SqlParameter("@QuestionId", SqlDbType.Int));
+                    insert.Parameters.Add(new SqlParameter("@Answer", SqlDbType.VarChar, 200));
+                    conn.Open();
+                    insert.Prepare();
+                    insert.Parameters[0].Value = questionId;
+                    insert.Parameters[1].Value = answer;
+                    using (SqlDataReader reader = insert.ExecuteReader())
+                    {
+                        string output = "";
+                        while (reader.Read())
+                        {
+                            output = reader["Output"].ToString();
+                            break;
+                        }
+                        conn.Close();
+                        return output;
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                return "Error";
+            }
+        }
         private string EncryptString(string key, string plainInput)
         {
             byte[] iv = new byte[16];
