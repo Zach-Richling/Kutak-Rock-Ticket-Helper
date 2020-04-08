@@ -82,6 +82,8 @@ namespace Ticketing_WCF_Application
     {
         public string question = "Test";
         public string description = "Test";
+        public int id = 0;
+        public int count = 0;
         public string[] answers;
     }
 }

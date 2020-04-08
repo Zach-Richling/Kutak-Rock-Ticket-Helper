@@ -230,8 +230,10 @@ namespace Ticketing_WCF_Application {
                         {
                             string outputQuestion = reader["Question"].ToString();
                             string outputDescription = reader["Description"].ToString();
+                            int outputId = int.Parse(reader["Id"].ToString());
+                            int outputCount = int.Parse(reader["QuestionCount"].ToString());
                             string[] outputAnswers = reader["Answers"].ToString().Split('|');
-                            output.Add(new FAQOutput { question = outputQuestion, description = outputDescription, answers = outputAnswers});
+                            output.Add(new FAQOutput { question = outputQuestion, description = outputDescription, answers = outputAnswers, id = outputId});
                         }
                         conn.Close();
                         return output;
