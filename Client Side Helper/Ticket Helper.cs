@@ -14,38 +14,62 @@ namespace KutakRock {
 
         public class MachineInfo
         {
-            public string id = "0"; //needs some sort of integration with DB @ Zach
-            public string ip = "";  
-            public string machineName = Environment.MachineName;
-            public string OSName = System.Environment.OSVersion.Platform;
-            public string OSVersion = System.Environment.OSVersion;
-            public string userName = Environment.UserName;
-            public string manufacturer = "";
-            public string name = "";
-            public string model = ""; // Not Done
-            public string serial = "";
-            public string BIOSNumber = ""; //Number vs version?
-            public string BIOSVersion = "";
-            public string macAddress = (
-                                            from nic in NetworkInterface.GetAllNetworkInterfaces()
-                                            where nic.OperationalStatus == OperationalStatus.Up
-                                            select nic.GetPhysicalAddress().ToString()
-                                        ).FirstOrDefault();
-            public string ramAmount = Microsoft.VisualBasic.Devices.ComputerInfo().TotalPhysicalMemory.ToString();
+            public string id            = "0"; 
+            public string ip            = "";  
+            public string machineName   = "";
+            public string OSName        = "";
+            public string OSVersion     = "";
+            public string userName      = "";
+            public string manufacturer  = "";
+            public string name          = "";
+            public string model         = ""; 
+            public string serial        = "";
+            public string BIOSNumber    = ""; //Number vs version?
+            public string BIOSVersion   = "";
+            public string macAddress    = "";
+            public string ramAmount     = "";
 
         }
 
+
         private readonly Timer _timer;
-        private string currentIp = new WebClient().DownloadString("https://api.ipify.org");
-        WebRequest webRequest = WebRequest.Create(new Uri("www.google.com"));
+        private string currentIp    = new WebClient().DownloadString("https://api.ipify.org");
+        WebRequest webRequest       = WebRequest.Create(new Uri("www.google.com"));
         
+        MachineInfo MachInf         = new MachineInfo();
+
+        MachInf id              = "0"; //needs some sort of integration with DB @ Zach
+        MachInf ip              = "";  
+        MachInf machineName     = Environment.MachineName;
+        MachInf OSName          = Environment.OSVersion.Platform;
+        MachInf OSVersion       = Environment.OSVersion;
+        MachInf userName        = Environment.UserName;
+        MachInf manufacturer    = "";
+        MachInf name            = "";
+        MachInf model           = ""; 
+        MachInf serial          = "";
+        MachInf BIOSNumber      = ""; //Number vs version?
+        MachInf BIOSVersion     = "";
+        MachInf macAddress      = (from nic in NetworkInterface.GetAllNetworkInterfaces() 
+                                    where nic.OperationalStatus == OperationalStatus.Up 
+                                    select nic.GetPhysicalAddress().ToString()
+                                    ).FirstOrDefault();
+        MachInf ramAmount       = Microsoft.VisualBasic.Devices.ComputerInfo().TotalPhysicalMemory.ToString();
+        
+        public void getModel()
+        {
+            PowerShell ModelShell   = PowerShell.Create("get-process").AddCommand("$ModelVar | Get-CimInstance -ClassName Win32_ComputerSystem");
+            ModelShell.invoke();
+            MachInf model           = ModelShell.ToString();
+        }
+
         //Used to gatehr information about the BIOS
         public void GetBiosInformation()
         {
-            string Serial = "";
-            string BiosVer = "";
-            string ManuFac = "";
-            string Name = "";
+            string Serial   = "";
+            string BiosVer  = "";
+            string ManuFac  = "";
+            string Name     = "";
 
             try
             {
@@ -53,10 +77,10 @@ namespace KutakRock {
                 ManagementObjectCollection collection = MOS.Get();
                 foreach (ManagementObject obj in collection)
                 {
-                    Serial = (string)obj["SerialNumber"];
+                    Serial  = (string)obj["SerialNumber"];
                     BiosVer = (string)obj["BIOSVersion"];
                     ManuFac = (string)obj["Manufacturer"];
-                    Name = (string)obj["Name"];
+                    Name    = (string)obj["Name"];
                 }
             }
             catch (Exception ex)
@@ -64,13 +88,11 @@ namespace KutakRock {
                 Console.WriteLine(ex.ToString());
             }
 
-            MachineInfo.manufacturer = ManuFac;
-            MachineInfo.BIOSVersion = BiosVer;
-            MachineInfo.name = Name;
-            MachineInfo.serial = Serial;
+            MachInf manufacturer = ManuFac;
+            MachInf BIOSVersion  = BiosVer;
+            MachInf name         = Name;
+            MachInf serial       = Serial;
         }
-
-     
 
         public Ticket_Helper(int repeat) {
             _timer = new Timer(repeat) { AutoReset = true};
@@ -81,10 +103,6 @@ namespace KutakRock {
             ensureIPCorrectness();
         }
 
-        private void pushIP()
-        {
-
-        }
         //Will return true if External IP changed.
         private bool ensureIPCorrectness() {
             string externalip = "";
@@ -104,6 +122,9 @@ namespace KutakRock {
             }
         }
 
+        private void pushIP() {
+
+        }
         public void Start() {
             Console.WriteLine("Current IP: " + currentIp);
             Console.WriteLine("Current Machine Name: " + Environment.MachineName);
@@ -117,6 +138,15 @@ namespace KutakRock {
         public string getCurrentIP() {
             return currentIp;
         }
+
+        public void pushMachineInfo() {
+            string MockJson = JsonConvert.SerializeObject<MachineInfo>(MachInf);
+
+        }
+
+
+
+
 
     }
 }
