@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Net;
-using System.Net.NetworkInformation;
-using System.Timers;
 using Topshelf;
 
 namespace KutakRock {
@@ -9,7 +6,7 @@ namespace KutakRock {
         public static void Main() {
             var exitCode = HostFactory.Run(x => { 
                 x.Service<Ticket_Helper>(s => {
-                    s.ConstructUsing(ipListener => new Ticket_Helper(5000));
+                    s.ConstructUsing(ipListener => new Ticket_Helper(15000));
                     s.WhenStarted(ipListener => ipListener.Start());
                     s.WhenStopped(ipListener => ipListener.Stop());
                 });
