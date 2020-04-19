@@ -76,7 +76,6 @@ namespace KutakRock {
 
         public void AddMachineInfo()
         {
-             Console.WriteLine("Sent Request");
             //Send request to WCF to update machine info for this computer
             Console.WriteLine(baseAddress + @"Database_Service.svc/AddMachineInfo/" + machineName + "?machineInfo=" + JsonConvert.SerializeObject(MachInf));
             
@@ -103,9 +102,10 @@ namespace KutakRock {
             if (EnsureIPCorrectness() == true)
             {
                 UpdateInfo();
+                AddComputer();
                 AddMachineInfo();
+                Console.WriteLine(JsonConvert.SerializeObject(MachInf));
             }
-            Console.WriteLine(JsonConvert.SerializeObject(MachInf));
         }
 
         private void UpdateInfo()
@@ -142,9 +142,6 @@ namespace KutakRock {
                                   where nic.OperationalStatus == OperationalStatus.Up
                                   select nic.GetPhysicalAddress().ToString()
                                     ).FirstOrDefault();
-
-            Console.WriteLine("Finished Machine Info");
-           
         }
 
         private bool EnsureIPCorrectness()
