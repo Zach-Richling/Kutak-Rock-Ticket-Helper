@@ -73,6 +73,14 @@ namespace Ticketing_WCF_Application
             ResponseFormat = WebMessageFormat.Json,
             BodyStyle = WebMessageBodyStyle.Wrapped)]
         string createFAQAnswer(string questionId, string answer);
+
+        [OperationContract]
+        [WebInvoke(Method = "GET",
+            UriTemplate = "/GetComputer/{ip}",
+            RequestFormat = WebMessageFormat.Json,
+            ResponseFormat = WebMessageFormat.Json,
+            BodyStyle = WebMessageBodyStyle.Wrapped)]
+        string GetComputer(string ip);
     }
 
     public class MachineInfo {

@@ -25,7 +25,7 @@ namespace Ticketing_WCF_Application {
         string connectionString = @"Server=tcp:kutak-rock.database.windows.net,1433;Initial Catalog=Kutak Rock Ticketing;Persist Security Info=False;User ID=Kutak_Rock_WCF;Password=7rM-mg!E-7Nh>J8q;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
         MachineInfo IDatabase_Service.getMachineinfo(string machineName)
         {
-            try 
+            try
             {
                 //string connectionString = @"Server=tcp:kutak-rock.database.windows.net,1433;Initial Catalog=Kutak Rock Ticketing;Persist Security Info=False;User ID=Kutak_Rock_WCF;Password=7rM-mg!E-7Nh>J8q;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
                 using (SqlConnection conn = new SqlConnection(connectionString))
@@ -57,9 +57,10 @@ namespace Ticketing_WCF_Application {
                     }
 
                 }
-            } catch (Exception e)
+            }
+            catch (Exception e)
             {
-                return new MachineInfo() { id = "-1"};
+                return new MachineInfo() { id = "-1" };
             }
         }
 
@@ -73,7 +74,8 @@ namespace Ticketing_WCF_Application {
             }
             string decryptedString = DecryptString(key, machineInfoInput.Replace(" ", "+"));
             */
-            try {
+            try
+            {
                 MachineInfo machineInfo = JsonConvert.DeserializeObject<MachineInfo>(machineInfoInput);
                 //string connectionString = @"Server=tcp:kutak-rock.database.windows.net,1433;Initial Catalog=Kutak Rock Ticketing;Persist Security Info=False;User ID=Kutak_Rock_WCF;Password=7rM-mg!E-7Nh>J8q;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
                 using (SqlConnection conn = new SqlConnection(connectionString))
@@ -114,7 +116,8 @@ namespace Ticketing_WCF_Application {
                     }
 
                 }
-            } catch (Exception e)
+            }
+            catch (Exception e)
             {
                 return e.Message;
             }
@@ -147,9 +150,10 @@ namespace Ticketing_WCF_Application {
                         return output;
                     }
                 }
-            } catch (Exception e)
+            }
+            catch (Exception e)
             {
-                return new DatabaseOutput() { id = "-1", info = e.Message};
+                return new DatabaseOutput() { id = "-1", info = e.Message };
             }
         }
         string IDatabase_Service.createTicket(string ticketName, string ticketDesc, string ticketSeverity, string computerID)
@@ -182,7 +186,8 @@ namespace Ticketing_WCF_Application {
                         return output;
                     }
                 }
-            } catch (Exception e)
+            }
+            catch (Exception e)
             {
                 return e.ToString();
             }
@@ -206,7 +211,8 @@ namespace Ticketing_WCF_Application {
 
                 return "Sent";
 
-            } catch (Exception e)
+            }
+            catch (Exception e)
             {
                 return e.ToString();
             }
@@ -233,7 +239,7 @@ namespace Ticketing_WCF_Application {
                             int outputId = int.Parse(reader["Id"].ToString());
                             int outputCount = int.Parse(reader["QuestionCount"].ToString());
                             string[] outputAnswers = reader["Answers"].ToString().Split('|');
-                            output.Add(new FAQOutput { question = outputQuestion, description = outputDescription, answers = outputAnswers, id = outputId});
+                            output.Add(new FAQOutput { question = outputQuestion, description = outputDescription, answers = outputAnswers, id = outputId });
                         }
                         conn.Close();
                         return output;
@@ -311,50 +317,27 @@ namespace Ticketing_WCF_Application {
                 return "Error";
             }
         }
-        private string EncryptString(string key, string plainInput)
+
+        public string GetComputer(string ip)
         {
-            byte[] iv = new byte[16];
-            byte[] array;
-            using (Aes aes = Aes.Create())
+            using (SqlConnection conn = new SqlConnection(connectionString))
             {
-                aes.Key = Encoding.UTF8.GetBytes(key);
-                aes.IV = iv;
-                ICryptoTransform encryptor = aes.CreateEncryptor(aes.Key, aes.IV);
-                using (MemoryStream memoryStream = new MemoryStream())
+                SqlCommand query = new SqlCommand(null, conn);
+                query.CommandText = "exec GetComputerByIP @ExternalIP";
+                query.Parameters.Add(new SqlParameter("@ExternalIP", SqlDbType.VarChar, 20));
+                conn.Open();
+                query.Prepare();
+                query.Parameters[0].Value = ip;
+                using (SqlDataReader reader = query.ExecuteReader())
                 {
-                    using (CryptoStream cryptoStream = new CryptoStream((Stream)memoryStream, encryptor, CryptoStreamMode.Write))
+                    string output = "1";
+                    while (reader.Read())
                     {
-                        using (StreamWriter streamWriter = new StreamWriter((Stream)cryptoStream))
-                        {
-                            streamWriter.Write(plainInput);
-                        }
-
-                        array = memoryStream.ToArray();
+                        output = reader["Id"].ToString();
+                        break;
                     }
-                }
-            }
-
-            return Convert.ToBase64String(array);
-        }
-
-        private static string DecryptString(string key, string cipherText)
-        {
-            byte[] iv = new byte[16];
-            byte[] buffer = Convert.FromBase64String(cipherText);
-            using (Aes aes = Aes.Create())
-            {
-                aes.Key = Encoding.UTF8.GetBytes(key);
-                aes.IV = iv;
-                ICryptoTransform decryptor = aes.CreateDecryptor(aes.Key, aes.IV);
-                using (MemoryStream memoryStream = new MemoryStream(buffer))
-                {
-                    using (CryptoStream cryptoStream = new CryptoStream((Stream)memoryStream, decryptor, CryptoStreamMode.Read))
-                    {
-                        using (StreamReader streamReader = new StreamReader((Stream)cryptoStream))
-                        {
-                            return streamReader.ReadToEnd();
-                        }
-                    }
+                    conn.Close();
+                    return output;
                 }
             }
         }
