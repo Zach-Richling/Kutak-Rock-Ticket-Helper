@@ -136,7 +136,7 @@ namespace KutakRock {
                 MachInf.OSName = obj.Properties["Caption"].Value.ToString();
                 MachInf.OSVersion = obj.Properties["Version"].Value.ToString();
             }
-
+            //Username and MAC Address
             MachInf.userName = Environment.UserName.ToString();
             MachInf.macAddress = (from nic in NetworkInterface.GetAllNetworkInterfaces()
                                   where nic.OperationalStatus == OperationalStatus.Up

@@ -22,12 +22,12 @@ namespace Ticketing_WCF_Application {
     // NOTE: In order to launch WCF Test Client for testing this service, please select Service1.svc or Service1.svc.cs at the Solution Explorer and start debugging.
     public class Database_Service : IDatabase_Service
     {
-        string key = "b14ca5898a4e4133bbce2ea2315a1916";
+        string connectionString = @"Server=tcp:kutak-rock.database.windows.net,1433;Initial Catalog=Kutak Rock Ticketing;Persist Security Info=False;User ID=Kutak_Rock_WCF;Password=7rM-mg!E-7Nh>J8q;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
         MachineInfo IDatabase_Service.getMachineinfo(string machineName)
         {
-            try 
+            try
             {
-                string connectionString = @"Server=tcp:kutak-rock.database.windows.net,1433;Initial Catalog=Kutak Rock Ticketing;Persist Security Info=False;User ID=Kutak_Rock_WCF;Password=7rM-mg!E-7Nh>J8q;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+                //string connectionString = @"Server=tcp:kutak-rock.database.windows.net,1433;Initial Catalog=Kutak Rock Ticketing;Persist Security Info=False;User ID=Kutak_Rock_WCF;Password=7rM-mg!E-7Nh>J8q;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     SqlCommand insert = new SqlCommand(null, conn);
@@ -57,9 +57,10 @@ namespace Ticketing_WCF_Application {
                     }
 
                 }
-            } catch (Exception e)
+            }
+            catch (Exception e)
             {
-                return new MachineInfo() { id = "-1"};
+                return new MachineInfo() { id = "-1" };
             }
         }
 
@@ -73,9 +74,10 @@ namespace Ticketing_WCF_Application {
             }
             string decryptedString = DecryptString(key, machineInfoInput.Replace(" ", "+"));
             */
-            try {
+            try
+            {
                 MachineInfo machineInfo = JsonConvert.DeserializeObject<MachineInfo>(machineInfoInput);
-                string connectionString = @"Server=tcp:kutak-rock.database.windows.net,1433;Initial Catalog=Kutak Rock Ticketing;Persist Security Info=False;User ID=Kutak_Rock_WCF;Password=7rM-mg!E-7Nh>J8q;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+                //string connectionString = @"Server=tcp:kutak-rock.database.windows.net,1433;Initial Catalog=Kutak Rock Ticketing;Persist Security Info=False;User ID=Kutak_Rock_WCF;Password=7rM-mg!E-7Nh>J8q;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     SqlCommand insert = new SqlCommand(null, conn);
@@ -114,7 +116,8 @@ namespace Ticketing_WCF_Application {
                     }
 
                 }
-            } catch (Exception e)
+            }
+            catch (Exception e)
             {
                 return e.Message;
             }
@@ -124,7 +127,7 @@ namespace Ticketing_WCF_Application {
         {
             try
             {
-                string connectionString = @"Server=tcp:kutak-rock.database.windows.net,1433;Initial Catalog=Kutak Rock Ticketing;Persist Security Info=False;User ID=Kutak_Rock_WCF;Password=7rM-mg!E-7Nh>J8q;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+                //string connectionString = @"Server=tcp:kutak-rock.database.windows.net,1433;Initial Catalog=Kutak Rock Ticketing;Persist Security Info=False;User ID=Kutak_Rock_WCF;Password=7rM-mg!E-7Nh>J8q;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     SqlCommand insert = new SqlCommand(null, conn);
@@ -147,16 +150,17 @@ namespace Ticketing_WCF_Application {
                         return output;
                     }
                 }
-            } catch (Exception e)
+            }
+            catch (Exception e)
             {
-                return new DatabaseOutput() { id = "-1", info = e.Message};
+                return new DatabaseOutput() { id = "-1", info = e.Message };
             }
         }
         string IDatabase_Service.createTicket(string ticketName, string ticketDesc, string ticketSeverity, string computerID)
         {
             try
             {
-                string connectionString = @"Server=tcp:kutak-rock.database.windows.net,1433;Initial Catalog=Kutak Rock Ticketing;Persist Security Info=False;User ID=Kutak_Rock_WCF;Password=7rM-mg!E-7Nh>J8q;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+                //string connectionString = @"Server=tcp:kutak-rock.database.windows.net,1433;Initial Catalog=Kutak Rock Ticketing;Persist Security Info=False;User ID=Kutak_Rock_WCF;Password=7rM-mg!E-7Nh>J8q;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     SqlCommand insert = new SqlCommand(null, conn);
@@ -182,7 +186,8 @@ namespace Ticketing_WCF_Application {
                         return output;
                     }
                 }
-            } catch (Exception e)
+            }
+            catch (Exception e)
             {
                 return e.ToString();
             }
@@ -206,7 +211,8 @@ namespace Ticketing_WCF_Application {
 
                 return "Sent";
 
-            } catch (Exception e)
+            }
+            catch (Exception e)
             {
                 return e.ToString();
             }
@@ -216,7 +222,7 @@ namespace Ticketing_WCF_Application {
         {
             try
             {
-                string connectionString = @"Server=tcp:kutak-rock.database.windows.net,1433;Initial Catalog=Kutak Rock Ticketing;Persist Security Info=False;User ID=Kutak_Rock_WCF;Password=7rM-mg!E-7Nh>J8q;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+                //string connectionString = @"Server=tcp:kutak-rock.database.windows.net,1433;Initial Catalog=Kutak Rock Ticketing;Persist Security Info=False;User ID=Kutak_Rock_WCF;Password=7rM-mg!E-7Nh>J8q;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     SqlCommand query = new SqlCommand(null, conn);
@@ -230,8 +236,10 @@ namespace Ticketing_WCF_Application {
                         {
                             string outputQuestion = reader["Question"].ToString();
                             string outputDescription = reader["Description"].ToString();
+                            int outputId = int.Parse(reader["Id"].ToString());
+                            int outputCount = int.Parse(reader["QuestionCount"].ToString());
                             string[] outputAnswers = reader["Answers"].ToString().Split('|');
-                            output.Add(new FAQOutput { question = outputQuestion, description = outputDescription, answers = outputAnswers});
+                            output.Add(new FAQOutput { question = outputQuestion, description = outputDescription, answers = outputAnswers, id = outputId });
                         }
                         conn.Close();
                         return output;
@@ -244,50 +252,92 @@ namespace Ticketing_WCF_Application {
             }
         }
 
-        private string EncryptString(string key, string plainInput)
+        public int createFAQ(string question, string desc)
         {
-            byte[] iv = new byte[16];
-            byte[] array;
-            using (Aes aes = Aes.Create())
+            try
             {
-                aes.Key = Encoding.UTF8.GetBytes(key);
-                aes.IV = iv;
-                ICryptoTransform encryptor = aes.CreateEncryptor(aes.Key, aes.IV);
-                using (MemoryStream memoryStream = new MemoryStream())
+                using (SqlConnection conn = new SqlConnection(connectionString))
                 {
-                    using (CryptoStream cryptoStream = new CryptoStream((Stream)memoryStream, encryptor, CryptoStreamMode.Write))
+                    SqlCommand insert = new SqlCommand(null, conn);
+                    insert.CommandText = "exec CreateQuestion @Question, @Description";
+                    insert.Parameters.Add(new SqlParameter("@Question", SqlDbType.VarChar, 200));
+                    insert.Parameters.Add(new SqlParameter("@Description", SqlDbType.VarChar, 200));
+                    conn.Open();
+                    insert.Prepare();
+                    insert.Parameters[0].Value = question;
+                    insert.Parameters[1].Value = desc;
+                    using (SqlDataReader reader = insert.ExecuteReader())
                     {
-                        using (StreamWriter streamWriter = new StreamWriter((Stream)cryptoStream))
+                        int output = -1;
+                        while (reader.Read())
                         {
-                            streamWriter.Write(plainInput);
+                            output = int.Parse(reader["Id"].ToString());
+                            break;
                         }
-
-                        array = memoryStream.ToArray();
+                        conn.Close();
+                        return output;
                     }
                 }
             }
-
-            return Convert.ToBase64String(array);
+            catch (Exception e)
+            {
+                return -1;
+            }
         }
 
-        private static string DecryptString(string key, string cipherText)
+        public string createFAQAnswer(string questionId, string answer)
         {
-            byte[] iv = new byte[16];
-            byte[] buffer = Convert.FromBase64String(cipherText);
-            using (Aes aes = Aes.Create())
+            try
             {
-                aes.Key = Encoding.UTF8.GetBytes(key);
-                aes.IV = iv;
-                ICryptoTransform decryptor = aes.CreateDecryptor(aes.Key, aes.IV);
-                using (MemoryStream memoryStream = new MemoryStream(buffer))
+                using (SqlConnection conn = new SqlConnection(connectionString))
                 {
-                    using (CryptoStream cryptoStream = new CryptoStream((Stream)memoryStream, decryptor, CryptoStreamMode.Read))
+                    SqlCommand insert = new SqlCommand(null, conn);
+                    insert.CommandText = "exec CreateAnswer @QuestionId, @Answer";
+                    insert.Parameters.Add(new SqlParameter("@QuestionId", SqlDbType.Int));
+                    insert.Parameters.Add(new SqlParameter("@Answer", SqlDbType.VarChar, 200));
+                    conn.Open();
+                    insert.Prepare();
+                    insert.Parameters[0].Value = questionId;
+                    insert.Parameters[1].Value = answer;
+                    using (SqlDataReader reader = insert.ExecuteReader())
                     {
-                        using (StreamReader streamReader = new StreamReader((Stream)cryptoStream))
+                        string output = "";
+                        while (reader.Read())
                         {
-                            return streamReader.ReadToEnd();
+                            output = reader["Output"].ToString();
+                            break;
                         }
+                        conn.Close();
+                        return output;
                     }
+                }
+            }
+            catch (Exception e)
+            {
+                return "Error";
+            }
+        }
+
+        public string GetComputer(string ip)
+        {
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                SqlCommand query = new SqlCommand(null, conn);
+                query.CommandText = "exec GetComputerByIP @ExternalIP";
+                query.Parameters.Add(new SqlParameter("@ExternalIP", SqlDbType.VarChar, 20));
+                conn.Open();
+                query.Prepare();
+                query.Parameters[0].Value = ip;
+                using (SqlDataReader reader = query.ExecuteReader())
+                {
+                    string output = "1";
+                    while (reader.Read())
+                    {
+                        output = reader["Id"].ToString();
+                        break;
+                    }
+                    conn.Close();
+                    return output;
                 }
             }
         }

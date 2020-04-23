@@ -57,6 +57,30 @@ namespace Ticketing_WCF_Application
             ResponseFormat = WebMessageFormat.Json,
             BodyStyle = WebMessageBodyStyle.Wrapped)]
         List<FAQOutput> getFAQ();
+
+        [OperationContract]
+        [WebInvoke(Method = "GET",
+            UriTemplate = "/CreateFAQ/{question}/{desc}",
+            RequestFormat = WebMessageFormat.Json,
+            ResponseFormat = WebMessageFormat.Json,
+            BodyStyle = WebMessageBodyStyle.Wrapped)]
+        int createFAQ(string question, string desc);
+
+        [OperationContract]
+        [WebInvoke(Method = "GET",
+            UriTemplate = "/CreateFAQAnswer/{questionId}/{answer}",
+            RequestFormat = WebMessageFormat.Json,
+            ResponseFormat = WebMessageFormat.Json,
+            BodyStyle = WebMessageBodyStyle.Wrapped)]
+        string createFAQAnswer(string questionId, string answer);
+
+        [OperationContract]
+        [WebInvoke(Method = "GET",
+            UriTemplate = "/GetComputer/{ip}",
+            RequestFormat = WebMessageFormat.Json,
+            ResponseFormat = WebMessageFormat.Json,
+            BodyStyle = WebMessageBodyStyle.Wrapped)]
+        string GetComputer(string ip);
     }
 
     public class MachineInfo {
@@ -82,6 +106,8 @@ namespace Ticketing_WCF_Application
     {
         public string question = "Test";
         public string description = "Test";
+        public int id = 0;
+        public int count = 0;
         public string[] answers;
     }
 }
