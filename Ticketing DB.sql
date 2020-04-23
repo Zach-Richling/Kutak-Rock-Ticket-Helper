@@ -32,7 +32,7 @@ CREATE TABLE Framing.ComputerInfo (
 );
 GO
 
---Insert error records, make sure these have a computer id of 1
+--Insert error records, make sure these have a computer id of 1.
 INSERT INTO Framing.Computers (ExternalIP, MachineName) VALUES ('Not Found', 'Not Found');
 INSERT INTO Framing.ComputerInfo VALUES (1, 'Not Found','Not Found','Not Found','Not Found','Not Found','Not Found','Not Found','Not Found', 0)
 GO
@@ -176,7 +176,7 @@ END
 GO
 
 --Returns machine info given a machine name
-ALTER PROCEDURE GetMachineInfoByMachineName @MachineName VARCHAR(20)
+CREATE PROCEDURE GetMachineInfoByMachineName @MachineName VARCHAR(20)
 AS
 BEGIN
 	SELECT 
@@ -191,7 +191,7 @@ END
 GO
 
 --Returns the entirity of the FAQ table, and answers, in a format that the WCF application can parse.
-ALTER PROCEDURE GetFAQ
+CREATE PROCEDURE GetFAQ
 AS
 BEGIN
 	SELECT
@@ -234,7 +234,7 @@ END
 GO
 
 --Creats an FAQ answer
-ALTER PROCEDURE CreateAnswer
+CREATE PROCEDURE CreateAnswer
 @QuestionId int
 ,@Answer VARCHAR(200)
 AS
