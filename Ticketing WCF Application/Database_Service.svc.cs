@@ -189,7 +189,7 @@ namespace Ticketing_WCF_Application {
             }
             catch (Exception e)
             {
-                return e.ToString();
+                return "-1";
             }
         }
 
