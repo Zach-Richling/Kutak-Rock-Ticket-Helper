@@ -251,6 +251,34 @@ BEGIN
 END
 GO
 
+--Gets Ticket Info with its corresponding computer info.
+CREATE PROCEDURE GetTicket 
+@TicketId int
+AS
+BEGIN
+	SELECT
+		TicketName
+		,TicketDescription
+		,TicketSeverity
+		,ExternalIP
+		,MachineName
+		,CreatedDate
+		,OSName
+		,OSVersion
+		,Username
+		,Manufacturer
+		,Model
+		,BIOSVersion
+		,MACAddress
+		,RAM
+	FROM
+		Framing.Ticket
+		LEFT JOIN Framing.Computers ON Ticket.ComputerId = Computers.Id
+		LEFT JOIN Framing.ComputerInfo ON Computers.Id = ComputerInfo.ComputerId
+	WHERE
+		Ticket.Id = @TicketId
+END
+GO
 /*===== Create a login for the WCF Service =====*/
 --Make sure to change this password and update the connections string in the WCF Service with the new password
 --This user needs permission to read, write, and execute stored procedures.
