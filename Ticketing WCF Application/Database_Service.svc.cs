@@ -197,24 +197,53 @@ namespace Ticketing_WCF_Application {
         {
             try
             {
-                MailMessage mail = new MailMessage();
-                SmtpClient smtp = new SmtpClient("mail.smtp2go.com");
-                smtp.Port = 2525;
-                smtp.Credentials = new NetworkCredential("giked83069@finxmail.com", "PMbMInSthgwI");
+                //string connectionString = @"Server=tcp:kutak-rock.database.windows.net,1433;Initial Catalog=Kutak Rock Ticketing;Persist Security Info=False;User ID=Kutak_Rock_WCF;Password=7rM-mg!E-7Nh>J8q;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    SqlCommand insert = new SqlCommand(null, conn);
+                    insert.CommandText = "exec GetTicket @TicketId";
+                    insert.Parameters.Add(new SqlParameter("@TicketId", SqlDbType.Int));
+                    conn.Open();
+                    insert.Prepare();
+                    insert.Parameters[0].Value = int.Parse(ticketId);
+                    using (SqlDataReader reader = insert.ExecuteReader())
+                    {
+                        string output = "";
+                        while (reader.Read())
+                        {
+                            output = "Submitted from " + reader["MachineName"].ToString() + " at " + reader["ExternalIP"].ToString() + Environment.NewLine +
+                                     "Ticket Name: " + reader["TicketName"].ToString() + Environment.NewLine +
+                                     "Ticket Description: " + reader["TicketDescription"].ToString() + Environment.NewLine +
+                                     "OS Name: " + reader["OSName"].ToString() + Environment.NewLine +
+                                     "OS Version: " + reader["OSVersion"].ToString() + Environment.NewLine +
+                                     "Username: " + reader["Username"].ToString() + Environment.NewLine +
+                                     "Manufacturer: " + reader["Manufacturer"].ToString() + Environment.NewLine +
+                                     "Model: " + reader["Model"].ToString() + Environment.NewLine +
+                                     "BIOS Version: " + reader["BIOSVersion"].ToString() + Environment.NewLine +
+                                     "MAC Address: " + reader["MACAddress"].ToString() + Environment.NewLine +
+                                     "RAM Amount: " + reader["RAM"].ToString() + " GB" + Environment.NewLine;
+                        }
+                        conn.Close();
 
-                mail.From = new MailAddress("giked83069@finxmail.com");
-                mail.To.Add("zwrdude@gmail.com");
-                mail.Subject = "Test Subject";
-                mail.Body = "Testing Body";
-
-                smtp.Send(mail);
-
-                return "Sent";
-
+                        //THE BELOW STILL NEEDS TO BE CONFIGURED
+                        /*
+                        MailMessage mail = new MailMessage();
+                        SmtpClient smtp = new SmtpClient("SMTP SERVER HERE");
+                        smtp.Port = 2525;
+                        smtp.Credentials = new NetworkCredential("EMAIL HERE", "PASSWORD HERE");
+                        mail.From = new MailAddress("EMAIL HERE");
+                        mail.To.Add("WHO YOU WANT TO SEND TO");
+                        mail.Subject = "Ticket Submission: No. " + ticketId;
+                        mail.Body = output;
+						smtp.Send(mail);
+                        */
+                        return "true";
+                    }
+                }
             }
             catch (Exception e)
             {
-                return e.ToString();
+                return "false";
             }
         }
 

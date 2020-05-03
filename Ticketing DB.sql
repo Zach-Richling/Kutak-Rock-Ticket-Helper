@@ -290,5 +290,3 @@ EXEC sp_addrolemember N'db_datawriter', N'Kutak_Rock_WCF'
 GRANT EXECUTE TO Kutak_Rock_WCF
 GO
 /*==============================================*/
-
-
