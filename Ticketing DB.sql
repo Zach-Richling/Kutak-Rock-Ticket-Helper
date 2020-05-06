@@ -279,6 +279,32 @@ BEGIN
 		Ticket.Id = @TicketId
 END
 GO
+
+--Gets the machine info for a machine by its ID
+CREATE PROCEDURE GetMachineInfo @ComputerId INT
+AS
+BEGIN
+    IF EXISTS(SELECT 1 FROM Framing.Computers WHERE Id = @ComputerId)
+        BEGIN
+            SELECT 
+                ComputerInfo.*
+            FROM 
+                Framing.ComputerInfo
+            WHERE
+                ComputerInfo.ComputerId = @ComputerId
+        END
+    ELSE
+        BEGIN
+            SELECT
+                *
+            FROM
+                Framing.ComputerInfo
+            WHERE
+                ComputerId = 1
+        END
+END
+GO
+
 /*===== Create a login for the WCF Service =====*/
 --Make sure to change this password and update the connections string in the WCF Service with the new password
 --This user needs permission to read, write, and execute stored procedures.

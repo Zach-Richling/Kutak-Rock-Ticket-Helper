@@ -23,7 +23,7 @@ namespace Ticketing_WCF_Application {
     public class Database_Service : IDatabase_Service
     {
         string connectionString = @"Server=tcp:kutak-rock.database.windows.net,1433;Initial Catalog=Kutak Rock Ticketing;Persist Security Info=False;User ID=Kutak_Rock_WCF;Password=7rM-mg!E-7Nh>J8q;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
-        MachineInfo IDatabase_Service.getMachineinfo(string machineName)
+        MachineInfo IDatabase_Service.getMachineinfo(string id)
         {
             try
             {
@@ -31,11 +31,11 @@ namespace Ticketing_WCF_Application {
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     SqlCommand insert = new SqlCommand(null, conn);
-                    insert.CommandText = "exec GetMachineInfoByMachineName @MachineName;";
-                    insert.Parameters.Add(new SqlParameter("@MachineName", SqlDbType.VarChar, 20));
+                    insert.CommandText = "exec GetMachineInfo @Id;";
+                    insert.Parameters.Add(new SqlParameter("@Id", SqlDbType.Int));
                     conn.Open();
                     insert.Prepare();
-                    insert.Parameters[0].Value = machineName;
+                    insert.Parameters[0].Value = int.Parse(id);
                     using (SqlDataReader reader = insert.ExecuteReader())
                     {
                         MachineInfo output = new MachineInfo();
