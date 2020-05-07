@@ -1,0 +1,111 @@
+\hypertarget{interface_ticketing___w_c_f___application_1_1_i_database___service}{}\doxysection{Ticketing\+\_\+\+W\+C\+F\+\_\+\+Application.\+I\+Database\+\_\+\+Service Interface Reference}
+\label{interface_ticketing___w_c_f___application_1_1_i_database___service}\index{Ticketing\_WCF\_Application.IDatabase\_Service@{Ticketing\_WCF\_Application.IDatabase\_Service}}
+Inheritance diagram for Ticketing\+\_\+\+W\+C\+F\+\_\+\+Application.\+I\+Database\+\_\+\+Service\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{interface_ticketing___w_c_f___application_1_1_i_database___service}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_ticketing___w_c_f___application_1_1_machine_info}{Machine\+Info}} \mbox{\hyperlink{interface_ticketing___w_c_f___application_1_1_i_database___service_ac7c9788974c5e61ed2bcc94a22007c29}{get\+Machineinfo}} (String id)
+\item 
+\mbox{\hyperlink{class_ticketing___w_c_f___application_1_1_database_output}{Database\+Output}} \mbox{\hyperlink{interface_ticketing___w_c_f___application_1_1_i_database___service_a1acb42200980fa4a516f9b32f8366a73}{add\+Computer}} (String ip, String machine\+Name)
+\item 
+string \mbox{\hyperlink{interface_ticketing___w_c_f___application_1_1_i_database___service_a91f829ad3eb4aea347cd05c01260d351}{add\+Machineinfo}} (string machine\+Name, string machine\+Info)
+\item 
+string \mbox{\hyperlink{interface_ticketing___w_c_f___application_1_1_i_database___service_ad0a76d58699ce15f0a4d565fd311d7a0}{create\+Ticket}} (string ticket\+Name, string ticket\+Desc, string ticket\+Severity, string computer\+ID)
+\item 
+string \mbox{\hyperlink{interface_ticketing___w_c_f___application_1_1_i_database___service_a507b8230ad4512ff6fc161adacdf3787}{send\+Ticket}} (string ticket\+Id)
+\item 
+List$<$ \mbox{\hyperlink{class_ticketing___w_c_f___application_1_1_f_a_q_output}{F\+A\+Q\+Output}} $>$ \mbox{\hyperlink{interface_ticketing___w_c_f___application_1_1_i_database___service_a99d77c0051472df6169ccb6cb104a6b7}{get\+F\+AQ}} ()
+\item 
+int \mbox{\hyperlink{interface_ticketing___w_c_f___application_1_1_i_database___service_a8e75688c4a5ba3909dfe66d3a820ff9d}{create\+F\+AQ}} (string question, string desc)
+\item 
+string \mbox{\hyperlink{interface_ticketing___w_c_f___application_1_1_i_database___service_aacff2f96ef75458c839bd69826c59e6b}{create\+F\+A\+Q\+Answer}} (string question\+Id, string answer)
+\item 
+string \mbox{\hyperlink{interface_ticketing___w_c_f___application_1_1_i_database___service_afbb5686257f81cc2b3b7ac371124ca80}{Get\+Computer}} (string ip)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{interface_ticketing___w_c_f___application_1_1_i_database___service_a1acb42200980fa4a516f9b32f8366a73}\label{interface_ticketing___w_c_f___application_1_1_i_database___service_a1acb42200980fa4a516f9b32f8366a73}} 
+\index{Ticketing\_WCF\_Application.IDatabase\_Service@{Ticketing\_WCF\_Application.IDatabase\_Service}!addComputer@{addComputer}}
+\index{addComputer@{addComputer}!Ticketing\_WCF\_Application.IDatabase\_Service@{Ticketing\_WCF\_Application.IDatabase\_Service}}
+\doxysubsubsection{\texorpdfstring{addComputer()}{addComputer()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_ticketing___w_c_f___application_1_1_database_output}{Database\+Output}} Ticketing\+\_\+\+W\+C\+F\+\_\+\+Application.\+I\+Database\+\_\+\+Service.\+add\+Computer (\begin{DoxyParamCaption}\item[{String}]{ip,  }\item[{String}]{machine\+Name }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{interface_ticketing___w_c_f___application_1_1_i_database___service_a91f829ad3eb4aea347cd05c01260d351}\label{interface_ticketing___w_c_f___application_1_1_i_database___service_a91f829ad3eb4aea347cd05c01260d351}} 
+\index{Ticketing\_WCF\_Application.IDatabase\_Service@{Ticketing\_WCF\_Application.IDatabase\_Service}!addMachineinfo@{addMachineinfo}}
+\index{addMachineinfo@{addMachineinfo}!Ticketing\_WCF\_Application.IDatabase\_Service@{Ticketing\_WCF\_Application.IDatabase\_Service}}
+\doxysubsubsection{\texorpdfstring{addMachineinfo()}{addMachineinfo()}}
+{\footnotesize\ttfamily string Ticketing\+\_\+\+W\+C\+F\+\_\+\+Application.\+I\+Database\+\_\+\+Service.\+add\+Machineinfo (\begin{DoxyParamCaption}\item[{string}]{machine\+Name,  }\item[{string}]{machine\+Info }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{interface_ticketing___w_c_f___application_1_1_i_database___service_a8e75688c4a5ba3909dfe66d3a820ff9d}\label{interface_ticketing___w_c_f___application_1_1_i_database___service_a8e75688c4a5ba3909dfe66d3a820ff9d}} 
+\index{Ticketing\_WCF\_Application.IDatabase\_Service@{Ticketing\_WCF\_Application.IDatabase\_Service}!createFAQ@{createFAQ}}
+\index{createFAQ@{createFAQ}!Ticketing\_WCF\_Application.IDatabase\_Service@{Ticketing\_WCF\_Application.IDatabase\_Service}}
+\doxysubsubsection{\texorpdfstring{createFAQ()}{createFAQ()}}
+{\footnotesize\ttfamily int Ticketing\+\_\+\+W\+C\+F\+\_\+\+Application.\+I\+Database\+\_\+\+Service.\+create\+F\+AQ (\begin{DoxyParamCaption}\item[{string}]{question,  }\item[{string}]{desc }\end{DoxyParamCaption})}
+
+
+
+Implemented in \mbox{\hyperlink{class_ticketing___w_c_f___application_1_1_database___service_ad9a9a52c857fed44f488b55d1b1c8eda}{Ticketing\+\_\+\+W\+C\+F\+\_\+\+Application.\+Database\+\_\+\+Service}}.
+
+\mbox{\Hypertarget{interface_ticketing___w_c_f___application_1_1_i_database___service_aacff2f96ef75458c839bd69826c59e6b}\label{interface_ticketing___w_c_f___application_1_1_i_database___service_aacff2f96ef75458c839bd69826c59e6b}} 
+\index{Ticketing\_WCF\_Application.IDatabase\_Service@{Ticketing\_WCF\_Application.IDatabase\_Service}!createFAQAnswer@{createFAQAnswer}}
+\index{createFAQAnswer@{createFAQAnswer}!Ticketing\_WCF\_Application.IDatabase\_Service@{Ticketing\_WCF\_Application.IDatabase\_Service}}
+\doxysubsubsection{\texorpdfstring{createFAQAnswer()}{createFAQAnswer()}}
+{\footnotesize\ttfamily string Ticketing\+\_\+\+W\+C\+F\+\_\+\+Application.\+I\+Database\+\_\+\+Service.\+create\+F\+A\+Q\+Answer (\begin{DoxyParamCaption}\item[{string}]{question\+Id,  }\item[{string}]{answer }\end{DoxyParamCaption})}
+
+
+
+Implemented in \mbox{\hyperlink{class_ticketing___w_c_f___application_1_1_database___service_a7662bdc326b85e20e04d84e0b0166f97}{Ticketing\+\_\+\+W\+C\+F\+\_\+\+Application.\+Database\+\_\+\+Service}}.
+
+\mbox{\Hypertarget{interface_ticketing___w_c_f___application_1_1_i_database___service_ad0a76d58699ce15f0a4d565fd311d7a0}\label{interface_ticketing___w_c_f___application_1_1_i_database___service_ad0a76d58699ce15f0a4d565fd311d7a0}} 
+\index{Ticketing\_WCF\_Application.IDatabase\_Service@{Ticketing\_WCF\_Application.IDatabase\_Service}!createTicket@{createTicket}}
+\index{createTicket@{createTicket}!Ticketing\_WCF\_Application.IDatabase\_Service@{Ticketing\_WCF\_Application.IDatabase\_Service}}
+\doxysubsubsection{\texorpdfstring{createTicket()}{createTicket()}}
+{\footnotesize\ttfamily string Ticketing\+\_\+\+W\+C\+F\+\_\+\+Application.\+I\+Database\+\_\+\+Service.\+create\+Ticket (\begin{DoxyParamCaption}\item[{string}]{ticket\+Name,  }\item[{string}]{ticket\+Desc,  }\item[{string}]{ticket\+Severity,  }\item[{string}]{computer\+ID }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{interface_ticketing___w_c_f___application_1_1_i_database___service_afbb5686257f81cc2b3b7ac371124ca80}\label{interface_ticketing___w_c_f___application_1_1_i_database___service_afbb5686257f81cc2b3b7ac371124ca80}} 
+\index{Ticketing\_WCF\_Application.IDatabase\_Service@{Ticketing\_WCF\_Application.IDatabase\_Service}!GetComputer@{GetComputer}}
+\index{GetComputer@{GetComputer}!Ticketing\_WCF\_Application.IDatabase\_Service@{Ticketing\_WCF\_Application.IDatabase\_Service}}
+\doxysubsubsection{\texorpdfstring{GetComputer()}{GetComputer()}}
+{\footnotesize\ttfamily string Ticketing\+\_\+\+W\+C\+F\+\_\+\+Application.\+I\+Database\+\_\+\+Service.\+Get\+Computer (\begin{DoxyParamCaption}\item[{string}]{ip }\end{DoxyParamCaption})}
+
+
+
+Implemented in \mbox{\hyperlink{class_ticketing___w_c_f___application_1_1_database___service_a891e5f235a52101dae0c7889ffa88088}{Ticketing\+\_\+\+W\+C\+F\+\_\+\+Application.\+Database\+\_\+\+Service}}.
+
+\mbox{\Hypertarget{interface_ticketing___w_c_f___application_1_1_i_database___service_a99d77c0051472df6169ccb6cb104a6b7}\label{interface_ticketing___w_c_f___application_1_1_i_database___service_a99d77c0051472df6169ccb6cb104a6b7}} 
+\index{Ticketing\_WCF\_Application.IDatabase\_Service@{Ticketing\_WCF\_Application.IDatabase\_Service}!getFAQ@{getFAQ}}
+\index{getFAQ@{getFAQ}!Ticketing\_WCF\_Application.IDatabase\_Service@{Ticketing\_WCF\_Application.IDatabase\_Service}}
+\doxysubsubsection{\texorpdfstring{getFAQ()}{getFAQ()}}
+{\footnotesize\ttfamily List$<$\mbox{\hyperlink{class_ticketing___w_c_f___application_1_1_f_a_q_output}{F\+A\+Q\+Output}}$>$ Ticketing\+\_\+\+W\+C\+F\+\_\+\+Application.\+I\+Database\+\_\+\+Service.\+get\+F\+AQ (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Implemented in \mbox{\hyperlink{class_ticketing___w_c_f___application_1_1_database___service_a90a616da0248d4afd4d0260686d116b3}{Ticketing\+\_\+\+W\+C\+F\+\_\+\+Application.\+Database\+\_\+\+Service}}.
+
+\mbox{\Hypertarget{interface_ticketing___w_c_f___application_1_1_i_database___service_ac7c9788974c5e61ed2bcc94a22007c29}\label{interface_ticketing___w_c_f___application_1_1_i_database___service_ac7c9788974c5e61ed2bcc94a22007c29}} 
+\index{Ticketing\_WCF\_Application.IDatabase\_Service@{Ticketing\_WCF\_Application.IDatabase\_Service}!getMachineinfo@{getMachineinfo}}
+\index{getMachineinfo@{getMachineinfo}!Ticketing\_WCF\_Application.IDatabase\_Service@{Ticketing\_WCF\_Application.IDatabase\_Service}}
+\doxysubsubsection{\texorpdfstring{getMachineinfo()}{getMachineinfo()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_ticketing___w_c_f___application_1_1_machine_info}{Machine\+Info}} Ticketing\+\_\+\+W\+C\+F\+\_\+\+Application.\+I\+Database\+\_\+\+Service.\+get\+Machineinfo (\begin{DoxyParamCaption}\item[{String}]{id }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{interface_ticketing___w_c_f___application_1_1_i_database___service_a507b8230ad4512ff6fc161adacdf3787}\label{interface_ticketing___w_c_f___application_1_1_i_database___service_a507b8230ad4512ff6fc161adacdf3787}} 
+\index{Ticketing\_WCF\_Application.IDatabase\_Service@{Ticketing\_WCF\_Application.IDatabase\_Service}!sendTicket@{sendTicket}}
+\index{sendTicket@{sendTicket}!Ticketing\_WCF\_Application.IDatabase\_Service@{Ticketing\_WCF\_Application.IDatabase\_Service}}
+\doxysubsubsection{\texorpdfstring{sendTicket()}{sendTicket()}}
+{\footnotesize\ttfamily string Ticketing\+\_\+\+W\+C\+F\+\_\+\+Application.\+I\+Database\+\_\+\+Service.\+send\+Ticket (\begin{DoxyParamCaption}\item[{string}]{ticket\+Id }\end{DoxyParamCaption})}
+
+
+
+Implemented in \mbox{\hyperlink{class_ticketing___w_c_f___application_1_1_database___service_a827b1fbf23603a988e8769ee33cdf234}{Ticketing\+\_\+\+W\+C\+F\+\_\+\+Application.\+Database\+\_\+\+Service}}.
+
+
+
+The documentation for this interface was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Ticketing W\+C\+F Application/\mbox{\hyperlink{_i_database___service_8cs}{I\+Database\+\_\+\+Service.\+cs}}\end{DoxyCompactItemize}
